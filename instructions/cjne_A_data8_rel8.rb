@@ -7,7 +7,7 @@ class CJNE_A_data8_rel8 < Instruction
 	end
 
 	def jumps(binary, pc)
-		target = pc + size + binary[pc+2]
+		target = pc + size + signed(binary[pc+2])
 		super + [target]
 	end
 end

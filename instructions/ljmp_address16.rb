@@ -7,7 +7,7 @@ class LJMP_address16 < Instruction
 	end
 
 	def jumps(binary, pc)
-		address = binary.address16(pc+1)
-		[address[0]*256 + address[1]]
+		address16 = binary[pc+1]*256 + binary[pc+2]
+		[address16]
 	end
 end

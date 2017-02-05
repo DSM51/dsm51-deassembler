@@ -11,5 +11,9 @@ class MOV_Rn_A < Instruction
     ["11111nnn"]
   end
 
-  def
+  def format(pc, *opcodes)
+    n = opcodes[0] & register_n_mask(encoding[0])
+    "mov R#{n}, A"
+  end
+
 end

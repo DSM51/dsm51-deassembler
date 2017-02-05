@@ -1,18 +1,18 @@
-class MOV_A_atRi < Instruction
+class MOV_direct_atRi < Instruction
   def mnemonic
-    "MOV A, @Ri"
+    "MOV direct, @Rn"
   end
 
   def size
-    1
+    2
   end
 
   def encoding
-    ["1110011i"]
+    ["1000011i", "direct"]
   end
 
   def format(pc, *opcodes)
     i = opcodes[0] & register_i_mask(encoding[0])
-    "mov A, @R#{i}"
+    "mov #{direct8(opcodes[1])}, @R#{i}"
   end
 end

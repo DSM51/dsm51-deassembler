@@ -10,4 +10,8 @@ class MOV_bit_C < Instruction
   def encoding
     ["10010010", "bit"]
   end
+
+  def format(pc, *opcodes)
+    "mov #{bit8(opcodes[1])}, C"
+  end
 end

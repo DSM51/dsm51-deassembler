@@ -10,4 +10,8 @@ class MOV_direct_A < Instruction
   def encoding
     ["11110101", "direct"]
   end
+
+  def format(pc, *opcodes)
+      "mov #{direct8(opcodes[1])}, A"
+  end
 end

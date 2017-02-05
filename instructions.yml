@@ -630,12 +630,12 @@
   :pseudo:
   - "(Ri) = (direct)"
   :example: MOV @R1, P2
-- :instruction: 'MOV @Rn, #immediate'
+- :instruction: 'MOV @Ri, #immediate'
   :psw: []
   :bytes: 2
   :cycles: 1
   :encoding:
-  - 0111011n
+  - 0111011i
   - immediate
   :pseudo:
   - "(Rn) = immediate"
@@ -765,12 +765,12 @@
   :pseudo:
   - "(direct) = immediate"
   :example: 'MOV P2, #0FFh'
-- :instruction: MOV direct, @Rn
+- :instruction: MOV direct, @Ri
   :psw: []
   :bytes: 2
   :cycles: 2
   :encoding:
-  - 1000011n
+  - 1000011i
   - direct
   :pseudo:
   - "(direct) = (Rn)"

@@ -10,4 +10,8 @@ class SUBB_A_immediate < Instruction
   def encoding
     ["10010100", "immediate"]
   end
+
+  def format(pc, *opcodes)
+    "subb A, #{immediate8(opcodes[1])}"
+  end
 end

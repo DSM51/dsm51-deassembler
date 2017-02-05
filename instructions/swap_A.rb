@@ -10,4 +10,8 @@ class SWAP_A < Instruction
   def encoding
     ["11000100"]
   end
+
+  def format(pc, *opcodes)
+    "swap A"
+  end
 end

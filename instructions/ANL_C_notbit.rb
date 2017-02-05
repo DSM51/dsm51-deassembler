@@ -10,4 +10,9 @@ class ANL_C_notbit < Instruction
   def encoding
     ["10110000", "bit"]
   end
+
+  def format(pc, *opcodes)
+    "anl C, /#{bit8(opcodes[1])}"
+  end
+
 end

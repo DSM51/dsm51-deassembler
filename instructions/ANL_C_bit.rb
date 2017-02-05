@@ -10,4 +10,9 @@ class ANL_C_bit < Instruction
   def encoding
     ["10000010", "bit"]
   end
+
+  def format(pc, *opcodes)
+    "anl C, #{bit8(opcodes[1])}"
+  end
+
 end

@@ -10,4 +10,9 @@ class ANL_A_immediate < Instruction
   def encoding
     ["01010100", "immediate"]
   end
+
+  def format(pc, *opcodes)
+    "anl A, #{immediate8(opcodes[1])}"
+  end
+
 end

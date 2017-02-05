@@ -70,7 +70,7 @@ def relative11(offset, from)
 end
 
 def signed8(address)
-	if (address & 0b1000_000) == 0b1000_000
+	if (address & 0b1000_0000) == 0b1000_0000
 		(address & 0b0111_1111) - 128
 	else
 		address

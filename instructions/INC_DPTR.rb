@@ -10,4 +10,8 @@ class INC_DPTR < Instruction
   def encoding
     ["10100011"]
   end
+
+  def format(pc, *opcodes)
+    "inc DPTR"
+  end
 end

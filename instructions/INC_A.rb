@@ -10,4 +10,8 @@ class INC_A < Instruction
   def encoding
     ["00000100"]
   end
+
+  def format(pc, *opcodes)
+    "inc A"
+  end
 end

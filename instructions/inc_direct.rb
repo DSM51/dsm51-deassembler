@@ -10,4 +10,8 @@ class INC_direct < Instruction
   def encoding
     ["00000101", "direct"]
   end
+
+  def format(pc, *opcodes)
+    "inc #{direct8(opcodes[1])}"
+  end
 end

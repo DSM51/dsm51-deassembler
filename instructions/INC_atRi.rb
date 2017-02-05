@@ -10,4 +10,9 @@ class INC_atRi < Instruction
   def encoding
     ["0000011i"]
   end
+
+  def format(pc, *opcodes)
+    i = opcodes[0] & register_i_mask(encoding[0])
+    "inc @R#{i}"
+  end
 end

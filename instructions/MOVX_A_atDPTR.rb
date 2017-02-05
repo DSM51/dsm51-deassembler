@@ -1,6 +1,6 @@
-class CLR_C < Instruction
+class MOVX_A_atDPTR < Instruction
   def mnemonic
-    "CLR C"
+    "MOVX A, @DPTR"
   end
 
   def size
@@ -8,6 +8,6 @@ class CLR_C < Instruction
   end
 
   def encoding
-    ["11000011"]
+    ["11100000"]
   end
 end

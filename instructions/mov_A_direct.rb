@@ -1,10 +1,13 @@
 class MOV_A_direct < Instruction
-	size 2
-	single 0b1110_0101
+  def mnemonic
+    "MOV A, direct"
+  end
 
-	# warning "mov A,ACC is not a valid Instruction."
+  def size
+    2
+  end
 
-	def decode(binary, pc)
-		"mov A, #{direct8(binary[pc+1])}"
-	end
+  def encoding
+    ["11100101", "direct"]
+  end
 end

@@ -1,6 +1,6 @@
-class CLR_C < Instruction
+class MOVC_A_atA_PC < Instruction
   def mnemonic
-    "CLR C"
+    "MOVC A, @A+PC"
   end
 
   def size
@@ -8,6 +8,6 @@ class CLR_C < Instruction
   end
 
   def encoding
-    ["11000011"]
+    ["10000011"]
   end
 end

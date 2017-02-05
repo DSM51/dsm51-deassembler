@@ -1,6 +1,6 @@
-class CLR_C < Instruction
+class XRL_A_atRi < Instruction
   def mnemonic
-    "CLR C"
+    "XRL A, @Ri"
   end
 
   def size
@@ -8,6 +8,6 @@ class CLR_C < Instruction
   end
 
   def encoding
-    ["11000011"]
+    ["0110011i"]
   end
 end

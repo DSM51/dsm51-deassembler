@@ -1,6 +1,6 @@
-class CLR_bit < Instruction
+class CPL_bit < Instruction
   def mnemonic
-    "CLR bit"
+    "CPL bit"
   end
 
   def size
@@ -8,6 +8,6 @@ class CLR_bit < Instruction
   end
 
   def encoding
-    ["11000010", "bit"]
+    ["10110010", "bit"]
   end
 end

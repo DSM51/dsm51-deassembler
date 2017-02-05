@@ -1,6 +1,6 @@
-class CLR_C < Instruction
+class CPL_C < Instruction
   def mnemonic
-    "CLR C"
+    "CPL C"
   end
 
   def size
@@ -8,6 +8,6 @@ class CLR_C < Instruction
   end
 
   def encoding
-    ["11000011"]
+    ["10110011"]
   end
 end

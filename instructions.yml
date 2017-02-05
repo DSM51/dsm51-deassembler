@@ -1,0 +1,1244 @@
+---
+- :instruction: ACALL addr11
+  :psw: []
+  :bytes: 2
+  :cycles: 2
+  :encoding:
+  - addr[10-8]10001
+  - addr[7-0]
+  :pseudo:
+  - PC = PC + 2
+  - SP = SP + 1
+  - "(SP) = PC[7-0]"
+  - SP = SP + 1
+  - "(SP) = PC[15-8]"
+  - PC[10-0] = A[10-0]
+  :example: ACALL LABEL
+- :instruction: 'ADD A, #immediate'
+  :psw:
+  - C
+  - AC
+  - OV
+  - P
+  :bytes: 2
+  :cycles: 1
+  :encoding:
+  - '00100100'
+  - immediate
+  :pseudo:
+  - A = A + immediate
+  :example: 'ADD A, #03h'
+- :instruction: ADD A, @Ri
+  :psw:
+  - C
+  - AC
+  - OV
+  - P
+  :bytes: 1
+  :cycles: 1
+  :encoding:
+  - 0010011i
+  :pseudo:
+  - A = A + (Ri)
+  :example: ADD A, @R1
+- :instruction: ADD A, Rn
+  :psw:
+  - C
+  - AC
+  - OV
+  - P
+  :bytes: 1
+  :cycles: 1
+  :encoding:
+  - 00101nnn
+  :pseudo:
+  - A = A + Rn
+  :example: ADD A, R0
+- :instruction: ADD A, direct
+  :psw:
+  - C
+  - AC
+  - OV
+  - P
+  :bytes: 2
+  :cycles: 1
+  :encoding:
+  - '00100101'
+  - direct
+  :pseudo:
+  - A = A + (direct)
+  :example: ADD A, 20h
+- :instruction: 'ADDC A, #immediate'
+  :psw:
+  - C
+  - AC
+  - OV
+  - P
+  :bytes: 2
+  :cycles: 1
+  :encoding:
+  - '00110100'
+  - immediate
+  :pseudo:
+  - A = A + C + immediate
+  :example: 'ADDC A, #23h'
+- :instruction: ADDC A, @Ri
+  :psw:
+  - C
+  - AC
+  - OV
+  - P
+  :bytes: 1
+  :cycles: 1
+  :encoding:
+  - 0011011i
+  :pseudo:
+  - A = A + C + (Ri)
+  :example: ADDC A, @R0
+- :instruction: ADDC A, Rn
+  :psw:
+  - C
+  - AC
+  - OV
+  - P
+  :bytes: 1
+  :cycles: 1
+  :encoding:
+  - 00111nnn
+  :pseudo:
+  - A = A + C + Rn
+  :example: ADDC A, R5
+- :instruction: ADDC A, direct
+  :psw:
+  - C
+  - AC
+  - OV
+  - P
+  :bytes: 2
+  :cycles: 1
+  :encoding:
+  - '00110101'
+  - direct
+  :pseudo:
+  - A = A + C + (direct)
+  :example: ADDC A, 30h
+- :instruction: AJMP addr11
+  :psw: []
+  :bytes: 2
+  :cycles: 2
+  :encoding:
+  - addr[10-8]00001
+  - addr[7-0]
+  :pseudo:
+  - PC = PC + 2
+  - PC[10-0] = A[10-0]
+  :example: AJMP LABEL
+- :instruction: 'ANL A, #immediate'
+  :psw:
+  - P
+  :bytes: 2
+  :cycles: 1
+  :encoding:
+  - '01010100'
+  - immediate
+  :pseudo:
+  - A = A AND immediate
+  :example: 'ANL A, #3Fh'
+- :instruction: ANL A, @Ri
+  :psw:
+  - P
+  :bytes: 1
+  :cycles: 1
+  :encoding:
+  - 0101011i
+  :pseudo:
+  - A = A AND (Ri)
+  :example: ANL A, @R0
+- :instruction: ANL A, Rn
+  :psw:
+  - P
+  :bytes: 1
+  :cycles: 1
+  :encoding:
+  - 01011nnn
+  :pseudo:
+  - A = A AND Rn
+  :example: ANL A, R4
+- :instruction: ANL A, direct
+  :psw:
+  - P
+  :bytes: 2
+  :cycles: 1
+  :encoding:
+  - '01010101'
+  - direct
+  :pseudo:
+  - A = A AND (direct)
+  :example: ANL A, 40h
+- :instruction: ANL C, /bit
+  :psw:
+  - C
+  :bytes: 2
+  :cycles: 2
+  :encoding:
+  - '10110000'
+  - bit
+  :pseudo:
+  - C = C AND NOT (bit)
+  :example: ANL C, /22h
+- :instruction: ANL C, bit
+  :psw:
+  - C
+  :bytes: 2
+  :cycles: 2
+  :encoding:
+  - '10000010'
+  - bit
+  :pseudo:
+  - C = C AND (bit)
+  :example: ANL C, 22h
+- :instruction: 'ANL direct, #immediate'
+  :psw: []
+  :bytes: 3
+  :cycles: 2
+  :encoding:
+  - '01010011'
+  - direct
+  - immediate
+  :pseudo:
+  - "(direct) = (direct) AND immediate"
+  :example: 'ANL 30h, #77h'
+- :instruction: ANL direct, A
+  :psw: []
+  :bytes: 2
+  :cycles: 1
+  :encoding:
+  - '01010010'
+  - direct
+  :pseudo:
+  - "(direct) = (direct) AND A"
+  :example: ANL 40h, A
+- :instruction: 'CJNE @Rn, #immediate, offset'
+  :psw:
+  - C
+  :bytes: 3
+  :cycles: 2
+  :encoding:
+  - 1011011n
+  - immediate
+  - offset
+  :pseudo:
+  - PC = PC + 3
+  - IF (Rn) <> immedate
+  - "  PC = PC + offset"
+  - IF (Rn) < immediate
+  - "  C = 1"
+  - ELSE
+  - "  C = 0"
+  :example: 'CJNE @R1, #24H, LABEL'
+- :instruction: 'CJNE A, #immediate, offset'
+  :psw:
+  - C
+  :bytes: 3
+  :cycles: 2
+  :encoding:
+  - '10110100'
+  - immediate
+  - offset
+  :pseudo:
+  - PC = PC + 3
+  - IF A <> immediate
+  - "  PC = PC + offset"
+  - IF A < immediate
+  - "  C = 1"
+  - ELSE
+  - "  C = 0"
+  :example: 'CJNE A, #01H, LABEL'
+- :instruction: CJNE A, direct, offset
+  :psw:
+  - C
+  :bytes: 3
+  :cycles: 2
+  :encoding:
+  - '10110101'
+  - direct
+  - offset
+  :pseudo:
+  - PC = PC + 3
+  - IF A <> (direct)
+  - "  PC = PC + offset"
+  - IF A < (direct)
+  - "  C = 1"
+  - ELSE
+  - "  C = 0"
+  :example: CJNE A, 60h, LABEL
+- :instruction: 'CJNE Rn, #immediate, offset'
+  :psw:
+  - C
+  :bytes: 3
+  :cycles: 2
+  :encoding:
+  - 10111nnn
+  - immediate
+  - offset
+  :pseudo:
+  - PC = PC + 3
+  - IF Rn <> immedate
+  - "  PC = PC + offset"
+  - IF Rn < immediate
+  - "  C = 1"
+  - ELSE
+  - "  C = 0"
+  :example: 'CJNE R6, #12H, LABEL'
+- :instruction: CLR A
+  :psw:
+  - P
+  :bytes: 1
+  :cycles: 1
+  :encoding:
+  - '11100100'
+  :pseudo:
+  - A = 0
+  :example: CLR A
+- :instruction: CLR C
+  :psw:
+  - C
+  :bytes: 1
+  :cycles: 1
+  :encoding:
+  - '11000011'
+  :pseudo:
+  - C = 0
+  :example: CLR C
+- :instruction: CLR bit
+  :psw: []
+  :bytes: 2
+  :cycles: 1
+  :encoding:
+  - '11000010'
+  - bit
+  :pseudo:
+  - "(bit)  = 0"
+  :example: CLR 01h
+- :instruction: CPL A
+  :psw: []
+  :bytes: 1
+  :cycles: 1
+  :encoding:
+  - '11110100'
+  :pseudo:
+  - A = NOT A
+  :example: CPL A
+- :instruction: CPL C
+  :psw:
+  - C
+  :bytes: 1
+  :cycles: 1
+  :encoding:
+  - '10110011'
+  :pseudo:
+  - C = NOT C
+  :example: CPL C
+- :instruction: CPL bit
+  :psw: []
+  :bytes: 2
+  :cycles: 1
+  :encoding:
+  - '10110010'
+  - bit
+  :pseudo:
+  - "(bit) = NOT (bit)"
+  :example: CPL 55h
+- :instruction: DA A
+  :psw:
+  - C
+  - P
+  :bytes: 1
+  :cycles: 1
+  :encoding:
+  - '11010100'
+  :pseudo:
+  - IF (A[3-0] > 9) OR (AC = 1)
+  - "  A = A + 6"
+  - IF (A[7-4] > 9) OR (C = 1)
+  - "  A = A + 60h"
+  :example: DA A
+- :instruction: DEC @Ri
+  :psw: []
+  :bytes: 1
+  :cycles: 1
+  :encoding:
+  - 0001011i
+  :pseudo:
+  - "(Ri) = (Ri) - 1"
+  :example: DEC @R1
+- :instruction: DEC A
+  :psw:
+  - P
+  :bytes: 1
+  :cycles: 1
+  :encoding:
+  - '00010100'
+  :pseudo:
+  - A = A - 1
+  :example: DEC A
+- :instruction: DEC Rn
+  :psw: []
+  :bytes: 1
+  :cycles: 1
+  :encoding:
+  - 00011nnn
+  :pseudo:
+  - Rn = Rn - 1
+  :example: DEC R7
+- :instruction: DEC direct
+  :psw: []
+  :bytes: 2
+  :cycles: 1
+  :encoding:
+  - '00010101'
+  - direct
+  :pseudo:
+  - "(direct) = (direct) - 1"
+  :example: DEC 35h
+- :instruction: DIV AB
+  :psw:
+  - C
+  - OV
+  - P
+  :bytes: 1
+  :cycles: 4
+  :encoding:
+  - '10000100'
+  :pseudo:
+  - AB = A / B
+  :example: DIV AB
+- :instruction: DJNZ Rn, offset
+  :psw: []
+  :bytes: 2
+  :cycles: 2
+  :encoding:
+  - 11011nnn
+  - offset
+  :pseudo:
+  - PC = PC + 2
+  - Rn = Rn - 1
+  - IF Rn <> 0
+  - "  PC = PC + offset"
+  :example: DJNZ R6, LABEL
+- :instruction: DJNZ direct, offset
+  :psw: []
+  :bytes: 3
+  :cycles: 2
+  :encoding:
+  - '11010101'
+  - direct
+  - offset
+  :pseudo:
+  - PC = PC + 2
+  - "(direct) = (direct) - 1"
+  - IF (direct) <> 0
+  - "  PC = PC + offset"
+  :example: DJNZ 40h, LABEL
+- :instruction: INC @Ri
+  :psw: []
+  :bytes: 1
+  :cycles: 1
+  :encoding:
+  - 0000011i
+  :pseudo:
+  - "(Ri) = (Ri) + 1"
+  :example: INC @R0
+- :instruction: INC A
+  :psw:
+  - P
+  :bytes: 1
+  :cycles: 1
+  :encoding:
+  - '00000100'
+  :pseudo:
+  - A = A + 1
+  :example: A = A + 1
+- :instruction: INC DPTR
+  :psw: []
+  :bytes: 1
+  :cycles: 2
+  :encoding:
+  - '10100011'
+  :pseudo:
+  - DPTR = DPTR + 1
+  :example: INC DPTR
+- :instruction: INC Rn
+  :psw: []
+  :bytes: 1
+  :cycles: 1
+  :encoding:
+  - 00001nnn
+  :pseudo:
+  - Rn = Rn + 1
+  :example: INC Rn
+- :instruction: INC direct
+  :psw: []
+  :bytes: 2
+  :cycles: 1
+  :encoding:
+  - '00000101'
+  - direct
+  :pseudo:
+  - "(direct) = (direct) + 1"
+  :example: INC 34h
+- :instruction: JB bit, offset
+  :psw: []
+  :bytes: 3
+  :cycles: 2
+  :encoding:
+  - '00100000'
+  - bit
+  - offset
+  :pseudo:
+  - PC = PC + 3
+  - IF (bit) = 1
+  - "  PC = PC + offset"
+  :example: JB P1.2 LABEL
+- :instruction: JBC bit, offset
+  :psw: []
+  :bytes: 3
+  :cycles: 2
+  :encoding:
+  - '00010000'
+  - bit
+  - offset
+  :pseudo:
+  - PC = PC + 3
+  - IF (bit) = 1
+  - "  (bit) = 0"
+  - "  PC = PC + offset"
+  :example: JBC 44h
+- :instruction: JC offset
+  :psw: []
+  :bytes: 2
+  :cycles: 2
+  :encoding:
+  - '01000000'
+  - offset
+  :pseudo:
+  - PC = PC + 2
+  - IF C = 1
+  - "  PC = PC + offset"
+  :example: JC LABEL
+- :instruction: JMP @A + DPTR
+  :psw: []
+  :bytes: 1
+  :cycles: 2
+  :encoding:
+  - '01110011'
+  :pseudo:
+  - PC = A + DPTR
+  :example: JMP @A+DPTR
+- :instruction: JNB bit, offset
+  :psw: []
+  :bytes: 3
+  :cycles: 2
+  :encoding:
+  - '00110000'
+  - bit
+  - offset
+  :pseudo:
+  - PC = PC + 3
+  - IF (bit) = 0
+  - "  PC = PC + offset"
+  :example: JNB P1.3, LABEL
+- :instruction: JNC offset
+  :psw: []
+  :bytes: 2
+  :cycles: 2
+  :encoding:
+  - '01010000'
+  - offset
+  :pseudo:
+  - PC = PC + 2
+  - IF C = 0
+  - "  PC = PC + offset"
+  :example: JNC LABEL
+- :instruction: JNZ offset
+  :psw: []
+  :bytes: 2
+  :cycles: 2
+  :encoding:
+  - '01110000'
+  - offset
+  :pseudo:
+  - PC = PC + 2
+  - IF A <> 0
+  - "  PC = PC + offset"
+  :example: JNZ LABEL
+- :instruction: JZ offset
+  :psw: []
+  :bytes: 2
+  :cycles: 2
+  :encoding:
+  - '01100000'
+  - offset
+  :pseudo:
+  - PC = PC + 2
+  - IF A = 0
+  - "  PC = PC + offset"
+  :example: JZ LABEL
+- :instruction: LCALL addr16
+  :psw: []
+  :bytes: 3
+  :cycles: 2
+  :encoding:
+  - '00010010'
+  - addr[15-8]
+  - addr[7-0]
+  :pseudo:
+  - PC = PC + 3
+  - SP = SP + 1
+  - "(SP) = PC[7-0]"
+  - SP = SP + 1
+  - "(SP) = PC[15-8]"
+  - PC = addr16
+  :example: LCALL SUB1
+- :instruction: LJMP addr16
+  :psw: []
+  :bytes: 3
+  :cycles: 2
+  :encoding:
+  - '00000010'
+  - addr[15-8]
+  - addr[7-0]
+  :pseudo:
+  - PC = addr16
+  :example: LJMP LABEL
+- :instruction: MOV @Ri, A
+  :psw: []
+  :bytes: 1
+  :cycles: 1
+  :encoding:
+  - 1111011i
+  :pseudo:
+  - "(Ri) = A"
+  :example: MOV @R0, A
+- :instruction: MOV @Ri, direct
+  :psw: []
+  :bytes: 2
+  :cycles: 2
+  :encoding:
+  - 1010011i
+  - direct
+  :pseudo:
+  - "(Ri) = (direct)"
+  :example: MOV @R1, P2
+- :instruction: 'MOV @Rn, #immediate'
+  :psw: []
+  :bytes: 2
+  :cycles: 1
+  :encoding:
+  - 0111011n
+  - immediate
+  :pseudo:
+  - "(Rn) = immediate"
+  :example: 'MOV @R0, #0'
+- :instruction: 'MOV A, #immediate'
+  :psw:
+  - P
+  :bytes: 2
+  :cycles: 1
+  :encoding:
+  - '01110100'
+  - immediate
+  :pseudo:
+  - A = immediate
+  :example: 'MOV A, #0FFh'
+- :instruction: MOV A, @Ri
+  :psw:
+  - P
+  :bytes: 1
+  :cycles: 1
+  :encoding:
+  - 1110011i
+  :pseudo:
+  - A = (Ri)
+  :example: MOV A, @R1
+- :instruction: MOV A, Rn
+  :psw:
+  - P
+  :bytes: 1
+  :cycles: 1
+  :encoding:
+  - 11101nnn
+  :pseudo:
+  - A = Rn
+  :example: MOV A, R6
+- :instruction: MOV A, direct
+  :psw:
+  - P
+  :bytes: 2
+  :cycles: 1
+  :encoding:
+  - '11100101'
+  - direct
+  :pseudo:
+  - A = (direct)
+  :example: MOV A, P0
+- :instruction: MOV C, bit
+  :psw:
+  - C
+  :bytes: 2
+  :cycles: 1
+  :encoding:
+  - '10100010'
+  - bit
+  :pseudo:
+  - C = (bit)
+  :example: MOV C, 22h
+- :instruction: 'MOV DPTR, #immediate'
+  :psw: []
+  :bytes: 3
+  :cycles: 2
+  :encoding:
+  - '10010000'
+  - immediate[15-8]
+  - immediate[7-0]
+  :pseudo:
+  - DPTR = immediate
+  :example: 'MOV DPTR, #1234h'
+- :instruction: 'MOV Rn, #immediate'
+  :psw: []
+  :bytes: 2
+  :cycles: 1
+  :encoding:
+  - 01111nnn
+  - immediate
+  :pseudo:
+  - Rn = immediate
+  :example: 'MOV R4, #0h'
+- :instruction: MOV Rn, A
+  :psw: []
+  :bytes: 1
+  :cycles: 1
+  :encoding:
+  - 11111nnn
+  :pseudo:
+  - Rn = A
+  :example: MOV R5, A
+- :instruction: MOV Rn, direct
+  :psw: []
+  :bytes: 2
+  :cycles: 2
+  :encoding:
+  - 10101nnn
+  - direct
+  :pseudo:
+  - Rn = (direct)
+  :example: MOV R4, P1
+- :instruction: MOV bit, C
+  :psw: []
+  :bytes: 2
+  :cycles: 2
+  :encoding:
+  - '10010010'
+  - bit
+  :pseudo:
+  - "(bit) = C"
+  :example: MOV 22h, C
+- :instruction: MOV dest_direct, src_direct
+  :psw: []
+  :bytes: 3
+  :cycles: 2
+  :encoding:
+  - '10000101'
+  - src_direct
+  - dest_direct
+  :pseudo:
+  - "(dest_direct) = (src_direct)"
+  :example: MOV P1, P0
+- :instruction: 'MOV direct, #immediate'
+  :psw: []
+  :bytes: 3
+  :cycles: 2
+  :encoding:
+  - '01110101'
+  - direct
+  - immediate
+  :pseudo:
+  - "(direct) = immediate"
+  :example: 'MOV P2, #0FFh'
+- :instruction: MOV direct, @Rn
+  :psw: []
+  :bytes: 2
+  :cycles: 2
+  :encoding:
+  - 1000011n
+  - direct
+  :pseudo:
+  - "(direct) = (Rn)"
+  :example: MOV P0, @R1
+- :instruction: MOV direct, A
+  :psw: []
+  :bytes: 2
+  :cycles: 1
+  :encoding:
+  - '11110101'
+  - direct
+  :pseudo:
+  - "(direct) = A"
+  :example: MOV P0, A
+- :instruction: MOV direct, Rn
+  :psw: []
+  :bytes: 2
+  :cycles: 2
+  :encoding:
+  - 10001nnn
+  - direct
+  :pseudo:
+  - "(direct) = Rn"
+  :example: MOV P2, R5
+- :instruction: MOVC A, @A+DPTR
+  :psw:
+  - P
+  :bytes: 1
+  :cycles: 2
+  :encoding:
+  - '10010011'
+  :pseudo:
+  - A = (A + DPTR)
+  :example: MOVC A, @A+DPTR
+- :instruction: MOVC A, @A+PC
+  :psw:
+  - P
+  :bytes: 1
+  :cycles: 2
+  :encoding:
+  - '10000011'
+  :pseudo:
+  - PC = PC + 1
+  - A = (A+PC)
+  :example: MOV A, @A+PC
+- :instruction: MOVX @Ri, A
+  :psw: []
+  :bytes: 1
+  :cycles: 2
+  :encoding:
+  - 1111001i
+  :pseudo:
+  - "(Ri) = A"
+  :example: MOVX @R0, A
+- :instruction: MOVX A, @DPTR
+  :psw:
+  - P
+  :bytes: 1
+  :cycles: 2
+  :encoding:
+  - '11100000'
+  :pseudo:
+  - A = (DPTR)
+  :example: MOVX A, @DPTR
+- :instruction: MOVX A, @Ri
+  :psw:
+  - P
+  :bytes: 1
+  :cycles: 2
+  :encoding:
+  - 1110001i
+  :pseudo:
+  - A = (Ri)
+  :example: MOVX A, @R1
+- :instruction: MUL AB
+  :psw:
+  - C
+  - OV
+  - P
+  :bytes: 1
+  :cycles: 4
+  :encoding:
+  - '10100100'
+  :pseudo:
+  - AB
+  - BA = A * B
+  :example: MUL AB
+- :instruction: NOP
+  :psw: []
+  :bytes: 1
+  :cycles: 1
+  :encoding:
+  - '00000000'
+  :pseudo:
+  - PC = PC + 1
+  :example: NOP
+- :instruction: 'ORL A, #immediate'
+  :psw:
+  - P
+  :bytes: 2
+  :cycles: 1
+  :encoding:
+  - '01000100'
+  - immediate
+  :pseudo:
+  - A = A OR immediate
+  :example: 'ORL A, #01h'
+- :instruction: ORL A, @Ri
+  :psw:
+  - P
+  :bytes: 1
+  :cycles: 1
+  :encoding:
+  - 0100011i
+  :pseudo:
+  - A = A OR (Ri)
+  :example: ORL A, @R0
+- :instruction: ORL A, Rn
+  :psw:
+  - P
+  :bytes: 1
+  :cycles: 1
+  :encoding:
+  - 01001nnn
+  :pseudo:
+  - A = A OR Rn
+  :example: ORL A, R5
+- :instruction: ORL A, direct
+  :psw:
+  - P
+  :bytes: 2
+  :cycles: 1
+  :encoding:
+  - '01000101'
+  - direct
+  :pseudo:
+  - A = A OR (direct)
+  :example: ORL A, P0
+- :instruction: ORL C, /bit
+  :psw:
+  - C
+  :bytes: 2
+  :cycles: 2
+  :encoding:
+  - '10100000'
+  - bit
+  :pseudo:
+  - C = C OR NOT (bit)
+  :example: ORL C, /22h
+- :instruction: ORL C, bit
+  :psw:
+  - C
+  :bytes: 2
+  :cycles: 2
+  :encoding:
+  - '01110010'
+  - bit
+  :pseudo:
+  - C = C OR (bit)
+  :example: ORL C, 22h
+- :instruction: 'ORL direct, #immediate'
+  :psw: []
+  :bytes: 3
+  :cycles: 2
+  :encoding:
+  - '01000011'
+  - direct
+  - immediate
+  :pseudo:
+  - "(direct) = (direct) OR immediate"
+  :example: 'ORL P0, #01h'
+- :instruction: ORL direct, A
+  :psw: []
+  :bytes: 2
+  :cycles: 1
+  :encoding:
+  - '01000010'
+  - direct
+  :pseudo:
+  - "(direct) = (direct) OR A"
+  :example: ORL P0, A
+- :instruction: POP direct
+  :psw: []
+  :bytes: 2
+  :cycles: 2
+  :encoding:
+  - '11010000'
+  - direct
+  :pseudo:
+  - "(direct) = (SP)"
+  - SP = SP - 1
+  :example: POP 34h
+- :instruction: PUSH direct
+  :psw: []
+  :bytes: 2
+  :cycles: 2
+  :encoding:
+  - '11000000'
+  - direct
+  :pseudo:
+  - SP = SP + 1
+  - "(SP) = (direct)"
+  :example: PUSH A
+- :instruction: RET
+  :psw: []
+  :bytes: 1
+  :cycles: 2
+  :encoding:
+  - '00100010'
+  :pseudo:
+  - PC[15-8] = (SP)
+  - SP = SP - 1
+  - PC[7-0] = (SP)
+  - SP = SP - 1
+  :example: RET
+- :instruction: RETI
+  :psw: []
+  :bytes: 1
+  :cycles: 2
+  :encoding:
+  - '00110010'
+  :pseudo:
+  - PC[15-8] = (SP)
+  - SP = SP - 1
+  - PC[7-0] = (SP)
+  - SP = SP - 1
+  :example: RETI
+- :instruction: RL A
+  :psw: []
+  :bytes: 1
+  :cycles: 1
+  :encoding:
+  - '00100011'
+  :pseudo:
+  - A[n+1] = A[n] WHERE n = 0 TO 6
+  - A[0] = A[7]
+  :example: RL A
+- :instruction: RLC A
+  :psw:
+  - C
+  - P
+  :bytes: 1
+  :cycles: 1
+  :encoding:
+  - '00110011'
+  :pseudo:
+  - A[n+1] = A[N] WHERE N = 0 TO 6
+  - A[0] = C
+  - C = A[7]
+  :example: RLC A
+- :instruction: RR A
+  :psw: []
+  :bytes: 1
+  :cycles: 1
+  :encoding:
+  - '00000011'
+  :pseudo:
+  - A[n] = A[n+1] where n = 0 to 6
+  - A[7] = A[0]
+  :example: RR A
+- :instruction: RRC A
+  :psw:
+  - C
+  - P
+  :bytes: 1
+  :cycles: 1
+  :encoding:
+  - '00010011'
+  :pseudo:
+  - A[n] = A[n+1] where n = 0 to 6
+  - A[7] = C
+  - C = A[0]
+  :example: RRC A
+- :instruction: SETB C
+  :psw:
+  - C
+  :bytes: 1
+  :cycles: 1
+  :encoding:
+  - '11010011'
+  :pseudo:
+  - C = 1
+  :example: SETB C
+- :instruction: SETB bit
+  :psw: []
+  :bytes: 2
+  :cycles: 1
+  :encoding:
+  - '11010010'
+  - bit
+  :pseudo:
+  - "(bit) = 1"
+  :example: SETB 63h
+- :instruction: SJMP offset
+  :psw: []
+  :bytes: 2
+  :cycles: 2
+  :encoding:
+  - '10000000'
+  - offset
+  :pseudo:
+  - PC = PC + 2
+  - PC = PC + offset
+  :example: SJMP LABEL
+- :instruction: 'SUBB A, #immediate'
+  :psw:
+  - C
+  - AC
+  - OV
+  - P
+  :bytes: 2
+  :cycles: 1
+  :encoding:
+  - '10010100'
+  - immediate
+  :pseudo:
+  - A = A - C - immediate
+  :example: 'SUBB A, #01h'
+- :instruction: SUBB A, @Ri
+  :psw:
+  - C
+  - AC
+  - OV
+  - P
+  :bytes: 1
+  :cycles: 1
+  :encoding:
+  - 1001011i
+  :pseudo:
+  - A = A - C - (Ri)
+  :example: SUBB A, @R1
+- :instruction: SUBB A, Rn
+  :psw:
+  - C
+  - AC
+  - OV
+  - P
+  :bytes: 1
+  :cycles: 1
+  :encoding:
+  - 10011nnn
+  :pseudo:
+  - A = A - C - Rn
+  :example: SUBB A, R5
+- :instruction: SUBB A, direct
+  :psw:
+  - C
+  - AC
+  - OV
+  - P
+  :bytes: 2
+  :cycles: 1
+  :encoding:
+  - '10010101'
+  - direct
+  :pseudo:
+  - A = A - C - (direct)
+  :example: SUBB A, 44h
+- :instruction: SWAP A
+  :psw: []
+  :bytes: 1
+  :cycles: 1
+  :encoding:
+  - '11000100'
+  :pseudo:
+  - A[3-0] swap A[7-4]
+  :example: SWAP A
+- :instruction: XCH A, @Ri
+  :psw:
+  - P
+  :bytes: 1
+  :cycles: 1
+  :encoding:
+  - 1100011i
+  :pseudo:
+  - A swap (Ri)
+  :example: XCH A, @R0
+- :instruction: XCH A, Rn
+  :psw:
+  - P
+  :bytes: 1
+  :cycles: 1
+  :encoding:
+  - 11001nnn
+  :pseudo:
+  - A swap Rn
+  :example: XCH A, R6
+- :instruction: XCH A, direct
+  :psw:
+  - P
+  :bytes: 2
+  :cycles: 1
+  :encoding:
+  - '11000101'
+  - direct
+  :pseudo:
+  - A swap (direct)
+  :example: XCH A, 45h
+- :instruction: XCHD A, @Ri
+  :psw:
+  - P
+  :bytes: 1
+  :cycles: 1
+  :encoding:
+  - 1101011i
+  :pseudo:
+  - A[3-0] swap (Ri)[3-0]
+  :example: XCHD A, @R1
+- :instruction: 'XRL A, #immediate'
+  :psw:
+  - P
+  :bytes: 2
+  :cycles: 1
+  :encoding:
+  - '01100100'
+  - immediate
+  :pseudo:
+  - A = A XOR immediate
+  :example: 'XRL A, #0FFh'
+- :instruction: XRL A, @Ri
+  :psw:
+  - P
+  :bytes: 1
+  :cycles: 1
+  :encoding:
+  - 0110011i
+  :pseudo:
+  - A = A XOR (Ri)
+  :example: XRL A, @R0
+- :instruction: XRL A, Rn
+  :psw:
+  - P
+  :bytes: 1
+  :cycles: 1
+  :encoding:
+  - 01101nnn
+  :pseudo:
+  - A = A XOR Rn
+  :example: XRL A, R7
+- :instruction: XRL A, direct
+  :psw:
+  - P
+  :bytes: 2
+  :cycles: 1
+  :encoding:
+  - '01100101'
+  - direct
+  :pseudo:
+  - A = A XOR (direct)
+  :example: XRL A, 34h
+- :instruction: 'XRL direct, #immediate'
+  :psw: []
+  :bytes: 3
+  :cycles: 2
+  :encoding:
+  - '01100011'
+  - direct
+  - immediate
+  :pseudo:
+  - "(direct) = (direct) XOR immediate"
+  :example: 'XRL 34H, #0FFh'
+- :instruction: XRL direct, A
+  :psw: []
+  :bytes: 2
+  :cycles: 1
+  :encoding:
+  - '01100010'
+  - direct
+  :pseudo:
+  - "(direct) = (direct) XOR A"
+  :example: XRL 34h, A

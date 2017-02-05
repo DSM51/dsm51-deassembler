@@ -1,6 +1,6 @@
-class CLR_C < Instruction
+class JMP_atA_DPTR < Instruction
   def mnemonic
-    "CLR C"
+    "JMP @A + DPTR"
   end
 
   def size
@@ -8,6 +8,6 @@ class CLR_C < Instruction
   end
 
   def encoding
-    ["11000011"]
+    ["01110011"]
   end
 end

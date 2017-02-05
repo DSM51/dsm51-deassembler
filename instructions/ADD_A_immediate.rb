@@ -10,4 +10,8 @@ class ADD_A_immediate < Instruction
   def encoding
     ["00100100", "immediate"]
   end
+
+  def format(pc, *opcodes)
+    "add A, #{immediate8(opcodes[1])}"
+  end
 end

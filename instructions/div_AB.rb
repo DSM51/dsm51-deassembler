@@ -10,4 +10,8 @@ class DIV_AB < Instruction
   def encoding
     ["10000100"]
   end
+
+  def format(pc, *opcodes)
+    "div ab"
+  end
 end

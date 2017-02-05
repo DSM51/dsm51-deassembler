@@ -1,10 +1,13 @@
-class INC_Ri < Instruction
-	size 1
+class INC_Rn < Instruction
+  def mnemonic
+    "INC Rn"
+  end
 
-	single_mask 0b1111_1000, 0b0000_1000
+  def size
+    1
+  end
 
-	def decode(binary, pc)
-		index = binary[pc] & 0b0000_0111
-		"inc R#{index}"
-	end
+  def encoding
+    ["00001nnn"]
+  end
 end

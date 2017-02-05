@@ -1,8 +1,13 @@
 class RL_A < Instruction
-	size 1
-	single 0b0010_0011
+  def mnemonic
+    "RL A"
+  end
 
-	def decode(binary, pc)
-		"rl A"
-	end
+  def size
+    1
+  end
+
+  def encoding
+    ["00100011"]
+  end
 end

@@ -1,9 +1,13 @@
 class INC_direct < Instruction
-	size 2
+  def mnemonic
+    "INC direct"
+  end
 
-	single 0b00000101
+  def size
+    2
+  end
 
-	def decode(binary, pc)
-		"inc #{direct8(binary[pc+1])}"
-	end
+  def encoding
+    ["00000101", "direct"]
+  end
 end

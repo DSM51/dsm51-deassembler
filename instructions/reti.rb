@@ -1,12 +1,13 @@
 class RETI < Instruction
-	size 1
-	single 0b0011_0010
+  def mnemonic
+    "RETI"
+  end
 
-	def decode(binary, pc)
-		"reti"
-	end
+  def size
+    1
+  end
 
-	def jumps(binary, pc)
-		[]
-	end
+  def encoding
+    ["00110010"]
+  end
 end

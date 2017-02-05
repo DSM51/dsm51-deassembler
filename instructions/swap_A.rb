@@ -1,8 +1,13 @@
 class SWAP_A < Instruction
-	size 1
-	single 0b1100_0100
+  def mnemonic
+    "SWAP A"
+  end
 
-	def decode(binary, pc)
-		"swap A"
-	end
+  def size
+    1
+  end
+
+  def encoding
+    ["11000100"]
+  end
 end

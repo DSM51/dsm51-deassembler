@@ -1,12 +1,17 @@
 class RET < Instruction
-	size 1
-	single 0b0010_0010
+  def mnemonic
+    "RET"
+  end
 
-	def decode(binary, pc)
-		"ret"
-	end
+  def size
+    1
+  end
 
-	def jumps(binary, pc)
-		[]
-	end
+  def encoding
+    ["00100010"]
+  end
+
+  def jumps(pc, *opcodes)
+    []
+  end
 end

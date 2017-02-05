@@ -1,8 +1,13 @@
 class MOV_direct_A < Instruction
-	size 2
-	single 0b1111_0101
+  def mnemonic
+    "MOV direct, A"
+  end
 
-	def decode(binary, pc)
-		"mov #{direct8(binary[pc+1])}, A"
-	end
+  def size
+    2
+  end
+
+  def encoding
+    ["11110101", "direct"]
+  end
 end

@@ -1,9 +1,15 @@
 class MOV_Rn_A < Instruction
-	size 1
-	single_mask 0b1111_1000, 0b1111_1000
+  def mnemonic
+    "MOV Rn, A"
+  end
 
-	def decode(binary, pc)
-		index = binary[pc] & 0x1
-		"mov R#{index}, A"
-	end
+  def size
+    1
+  end
+
+  def encoding
+    ["11111nnn"]
+  end
+
+  def
 end

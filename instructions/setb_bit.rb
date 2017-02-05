@@ -1,8 +1,13 @@
 class SETB_bit < Instruction
-	size 2
-	single 0xd2
+  def mnemonic
+    "SETB bit"
+  end
 
-	def decode(binary, pc)
-		"setb #{bit_address8(binary[pc+1])}"
-	end
+  def size
+    2
+  end
+
+  def encoding
+    ["11010010", "bit"]
+  end
 end

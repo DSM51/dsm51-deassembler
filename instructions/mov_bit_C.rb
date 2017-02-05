@@ -1,10 +1,13 @@
 class MOV_bit_C < Instruction
-	size 2
+  def mnemonic
+    "MOV bit, C"
+  end
 
-	single 0b1001_0010
+  def size
+    2
+  end
 
-	def decode(binary, pc)
-		bit_address = binary.hex(pc+1, 1)
-		"mov #{bit_address}, C"
-	end
+  def encoding
+    ["10010010", "bit"]
+  end
 end

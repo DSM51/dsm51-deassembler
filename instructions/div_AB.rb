@@ -1,8 +1,13 @@
 class DIV_AB < Instruction
-	size 1
-	single 0b1000_0100
+  def mnemonic
+    "DIV AB"
+  end
 
-	def decode(binary, pc)
-		"div AB"
-	end
+  def size
+    1
+  end
+
+  def encoding
+    ["10000100"]
+  end
 end

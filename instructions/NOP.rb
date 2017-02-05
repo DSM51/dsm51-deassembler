@@ -10,4 +10,8 @@ class NOP < Instruction
   def encoding
     ["00000000"]
   end
+
+  def format(pc, *opcodes)
+    "nop"
+  end
 end

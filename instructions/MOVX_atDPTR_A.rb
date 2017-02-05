@@ -1,6 +1,6 @@
-class MOVX_A_atDPTR < Instruction
+class MOVX_atDPTR_A < Instruction
   def mnemonic
-    "MOVX A, @DPTR"
+    "MOVX @DPTR, A"
   end
 
   def size
@@ -8,10 +8,10 @@ class MOVX_A_atDPTR < Instruction
   end
 
   def encoding
-    ["11100000"]
+    ["11110000"]
   end
 
   def format(pc, *opcodes)
-    "movx A, @DPTR"
+    "movx @DPTR, A"
   end
 end

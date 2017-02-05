@@ -1,18 +1,18 @@
-class MOVX_atRi_A < Instruction
+class MOV_atRi_immediate < Instruction
   def mnemonic
-    "MOVX @Ri, A"
+    "MOV @Rn, #immediate"
   end
 
   def size
-    1
+    2
   end
 
   def encoding
-    ["1111001i"]
+    ["0111011i", "immediate"]
   end
 
   def format(pc, *opcodes)
     i = opcodes[0] & register_i_mask(encoding[0])
-    "movx @R#{i}, A"
+    "mov @R#{i}, #{immediate8(opcodes[1])}"
   end
 end

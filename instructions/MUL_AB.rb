@@ -10,4 +10,8 @@ class MUL_AB < Instruction
   def encoding
     ["10100100"]
   end
+
+  def format(pc, *opcodes)
+    "mul AB"
+  end
 end

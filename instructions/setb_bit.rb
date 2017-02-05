@@ -10,4 +10,9 @@ class SETB_bit < Instruction
   def encoding
     ["11010010", "bit"]
   end
+
+  def format(pc, *opcodes)
+    "setb #{bit8(opcodes[1])}"
+  end
+
 end

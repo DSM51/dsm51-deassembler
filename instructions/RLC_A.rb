@@ -10,4 +10,8 @@ class RLC_A < Instruction
   def encoding
     ["00110011"]
   end
+
+  def format(pc, *opcodes)
+    "rlc A"
+  end
 end

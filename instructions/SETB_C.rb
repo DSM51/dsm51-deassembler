@@ -10,4 +10,8 @@ class SETB_C < Instruction
   def encoding
     ["11010011"]
   end
+
+  def format(pc, *opcodes)
+    "setb C"
+  end
 end

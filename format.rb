@@ -1,10 +1,15 @@
 def direct16(high, low)
 	addr = high*256 + low
-	"# #{addr.hex(16)}h"
+	"$ #{addr.hex(16)}h"
 end
 
 def immediate8(value)
 	"# #{value.hex(8)}h"
+end
+
+def immediate16(high, low)
+	value = high*256+low
+	"# #{value.hex(16)} (#{value})"
 end
 
 def direct8(address)
@@ -33,7 +38,7 @@ def direct8(address)
 		0xe0 => 'ACC'
 	}
 
-	map[address] || "0x" + address.to_s(16).pad(2)
+	map[address] || "$ " + address.to_s(16).pad(2)
 end
 
 

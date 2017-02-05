@@ -10,4 +10,8 @@ class ORL_A_direct < Instruction
   def encoding
     ["01000101", "direct"]
   end
+
+  def format(pc, *opcodes)
+    "orl A, #{direct8(opcodes[1])}"
+  end
 end

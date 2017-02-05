@@ -10,4 +10,8 @@ class ORL_C_bit < Instruction
   def encoding
     ["01110010", "bit"]
   end
+
+  def format(pc, *opcodes)
+    "orl C, #{bit8(opcodes[1])}"
+  end
 end

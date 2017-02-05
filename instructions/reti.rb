@@ -10,4 +10,12 @@ class RETI < Instruction
   def encoding
     ["00110010"]
   end
+
+  def format(pc, *opcodes)
+    "reti"
+  end
+
+  def jumps(pc, *opcodes)
+    []
+  end
 end

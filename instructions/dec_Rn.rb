@@ -10,4 +10,9 @@ class DEC_Rn < Instruction
   def encoding
     ["00011nnn"]
   end
+
+  def format(pc, *opcodes)
+    n = opcodes[0] & register_n_mask(encoding[0])
+    "dec R#{n}"
+  end
 end

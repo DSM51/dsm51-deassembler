@@ -10,4 +10,8 @@ class DEC_direct < Instruction
   def encoding
     ["00010101", "direct"]
   end
+
+  def format(pc, *opcodes)
+    "dec #{direct8(opcodes[1])}"
+  end
 end

@@ -12,11 +12,11 @@ class JB_bit_offset < Instruction
   end
 
   def format(pc, *opcodes)
-    "jc #{bit8(opcodes[1])}, #{relative8(opcodes[2], pc+size)}"
+    "jb #{bit8(opcodes[1])}, #{relative8(opcodes[2], pc+size)}"
   end
 
   def jumps(pc, *opcodes)
-    super #+ [pc+size+signed8(opcodes[2])]
+    super + [pc+size+signed8(opcodes[2])]
   end
 
 end

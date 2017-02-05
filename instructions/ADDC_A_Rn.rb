@@ -10,4 +10,10 @@ class ADDC_A_Rn < Instruction
   def encoding
     ["00111nnn"]
   end
+
+  def format(pc, *opcodes)
+    n = opcodes[0] & register_n_mask(encoding[0])
+    "addc A, R#{n}"
+  end
+
 end

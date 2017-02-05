@@ -10,4 +10,9 @@ class ADDC_A_atRi < Instruction
   def encoding
     ["0011011i"]
   end
+
+  def format(pc, *opcodes)
+    i = opcodes[0] & register_i_mask(encoding[0])
+    "addc A, @R#{i}"
+  end
 end

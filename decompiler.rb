@@ -41,7 +41,7 @@ class Decompiler
       checked << entry
       checked.uniq!
 
-      print " | #{entry.hex(16)}: "
+    #  print " | #{entry.hex(16)}: "
 
       possible = find(entry)
 
@@ -61,11 +61,11 @@ class Decompiler
         set_responsibility(entry+offset, :code)
       end
 
-      puts " | #{result}"
+      # puts " | #{result}"
 
       instruction.jumps(entry, *opcodes).each do |jump|
         entries << jump
-        puts " |   jump #{jump.hex(16)}"
+        # puts " |   jump #{jump.hex(16)}"
       end
     end
   end

@@ -12,6 +12,6 @@ class JMP_atA_DPTR < Instruction
   end
 
   def format(pc, *opcodes)
-    puts "jmp @A+DPTR"
+    "jmp @A+DPTR"
   end
 end

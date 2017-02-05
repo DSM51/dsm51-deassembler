@@ -12,7 +12,7 @@ class DJNZ_direct_offset < Instruction
   end
 
   def format(pc, *opcodes)
-    "djnz #{direct8(opcodes[1])}, #{relative8(opcode[2], pc+size)}"
+    "djnz #{direct8(opcodes[1])}, #{relative8(opcodes[2], pc+size)}"
   end
 
   def jumps(pc, *opcodes)

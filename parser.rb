@@ -47,11 +47,11 @@ class Parser
 			r
 		end
 
-		# content.each do |line|
-			# puts "#{line.type} @#{line.address}"
-		# end
+		dict = interpret(content).map.with_index do |byte, index|
+			[index, byte]
+		end
 
-		Binary.new interpret(content)
+		Hash[dict]
 	end
 
 	def interpret(records)

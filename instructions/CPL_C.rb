@@ -10,4 +10,8 @@ class CPL_C < Instruction
   def encoding
     ["10110011"]
   end
+
+  def format(pc, *opcodes)
+    "cpl C"
+  end
 end

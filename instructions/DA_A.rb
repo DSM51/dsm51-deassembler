@@ -10,4 +10,8 @@ class DA_A < Instruction
   def encoding
     ["11010100"]
   end
+
+  def format(pc, *opcodes)
+    "da A"
+  end
 end

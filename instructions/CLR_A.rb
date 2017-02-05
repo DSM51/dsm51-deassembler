@@ -10,4 +10,8 @@ class CLR_A < Instruction
   def encoding
     ["11100100"]
   end
+
+  def format(pc, *opcodes)
+    "clr A"
+  end
 end

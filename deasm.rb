@@ -115,12 +115,25 @@ case File.extname(options[:file]).downcase
 when '.hex'
 	parser = Parser.new
 	block = parser.parse(content)
+
+when '.lst'
+	data = content
+		.split(/\s/)
+		.map.with_index { |c,i| [i.hex(16),c] }
+
+	data = Hash[data]
+	block = (first..last)
+		.map { |address| address.hex(16) }
+		.map { |address| [address.to_i(16), (data[address] || "ff").to_i(16)] }
+
+
+	block = Hash[block]
 else
 	data = Hash[normalize(content)]
 
 	block = (first..last)
 		.map { |address| address.hex(16) }
-		.map { |address| [address.to_i(16), (data[address] || "0x00").to_i(16)] }
+		.map { |address| [address.to_i(16), (data[address] || "ff").to_i(16)] }
 
 	block = Hash[block]
 end

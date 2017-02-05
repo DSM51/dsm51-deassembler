@@ -61,7 +61,7 @@ def relative11(offset, from)
 	current = from & 0b1110_0000_0000_0000
 	target = current|offset
 
-	"$ #{offset.hex(11)}h (0x#{target.hex(16)})"
+	"$ #{offset.hex(11)}h (#{target.hex(16)})"
 end
 
 def signed8(address)

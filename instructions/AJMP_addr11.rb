@@ -12,21 +12,21 @@ class AJMP_addr11 < Instruction
   end
 
   def jumps(pc, *opcodes)
+    current = pc & 0b1110_0000_0000_0000
+
     low = opcodes[1]
     high = (opcodes[0] & 0b1110_0000) >> 5
-    current = pc & 0b1110_0000
+    address = high*256+low
 
-    address = (high|current)*256+low
-    [address]
+    [current|address]
   end
 
   def format(pc, *opcodes)
     low = opcodes[1]
     high = (opcodes[0] & 0b1110_0000) >> 5
-    current = pc & 0b1110_0000
+    address = high*256+low
+    current = pc & 0b1110_0000_0000_0000
 
-    # address = (high|current)*256+low
-
-    "ajmp #{low}"
+    "ajmp #{relative11(address, pc+2)}"
   end
 end

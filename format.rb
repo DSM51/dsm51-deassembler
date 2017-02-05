@@ -28,6 +28,7 @@ def direct8(address)
 		0xa8 => 'IE',
 
 		0xb0 => 'P3',
+		0xb8	=>	'IP',
 		0xd0 => 'PSW',
 		0xe0 => 'ACC'
 	}
@@ -45,10 +46,22 @@ def data16(binary)
 	"# 0x#{(binary[0]*256+binary[1]).to_s(16).pad(4)}"
 end
 
-def relative8(relative, from)
-	relative = signed8(relative)
+def relative8(offset, from)
+	offset = signed8(offset)
 
-	"#{relative} (0x#{(from+relative).to_s(16).pad(4)})"
+	"$ #{offset.hex(8)}h (0x#{(from+offset).hex(16)})"
+end
+
+def text8(byte)
+	return byte.chr if byte >= 32 && byte <= 126
+	'.'
+end
+
+def relative11(offset, from)
+	current = from & 0b1110_0000_0000_0000
+	target = current|offset
+
+	"$ #{offset.hex(11)}h (0x#{target.hex(16)})"
 end
 
 def signed8(address)
@@ -58,6 +71,7 @@ def signed8(address)
 		address
 	end
 end
+
 
 def bit8(address)
 	map = {

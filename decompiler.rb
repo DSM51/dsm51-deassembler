@@ -36,6 +36,7 @@ class Decompiler
       entry = entries.pop
 
       next if checked.include? entry
+      next if !binary.space.include? entry
 
       checked << entry
       checked.uniq!
@@ -46,7 +47,7 @@ class Decompiler
 
       if possible.count != 1
         ap possible
-        puts " | dont know at #{entry.hex(16)}"
+        puts " | dont know (#{possible.count}) at #{entry.hex(16)} for #{take(entry,3).map{|x|x.hex(8)}}"
         break
       end
 
@@ -92,16 +93,18 @@ class Decompiler
 
       if instruction.nil?
         opcode = take(address, 1).first
-        puts "\t#{opcode.hex(8)}\t(#{responsibility(address)})"
+        puts "\t#{opcode.hex(8)}\t(#{responsibility(address)})  '#{text8(opcode)}'"
         address += 1
       else
         opcodes = take(address, instruction.size)
         bytes = opcodes.map { |op| op.hex(8) }
         bytes << "  " while bytes.count < 3
 
-      	puts "\t#{bytes.join(' ')}\t#{instruction.format(address, *opcodes)}"
+      	puts "\t#{bytes.join(' ')}\t\t\t#{instruction.format(address, *opcodes)}"
         address += instruction.size
       end
+
+      break if address > binary.last
     end
   end
 end

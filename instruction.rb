@@ -29,6 +29,8 @@ class Instruction
         true
       elsif is_byte_registry?(encoding)
         match_encoding(encoding, opcode)
+      elsif is_index_registry?(encoding)
+        match_encoding(encoding, opcode)
       else
         opcode == encoding
       end
@@ -49,6 +51,7 @@ class Instruction
       when 'direct' then direct8(value)
       when '#immediate' then immediate8(value)
       when 'bit' then bit8(value)
+      when 'offset' then relative8(value, pc+size)
       when 'Rn'
         index -= 1
         n = opcodes[0] & register_n_mask(encoding[0])
@@ -94,6 +97,10 @@ class Instruction
   end
 
   def is_byte_registry?(string)
-    ["01n", "01i"].include? string.each_char.to_a.uniq.sort.join
+    (string.split('').uniq | ["0","1","n"]).size == 3
+  end
+
+  def is_index_registry?(string)
+    (string.split('').uniq | ["0","1","i"]).size == 3
   end
 end

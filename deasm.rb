@@ -15,13 +15,17 @@ end
 
 class String
 	def pad(size, sign = "0")
-		sign * (size-self.size) + self
+		sign * (size-self.size).abs + self
 	end
 end
 
 class Fixnum
   def hex(bits=8)
-    to_s(16).pad(bits/8*2)
+		if self < 0
+			"-" + (-self).to_s(16).pad(bits/8*2)
+		else
+			self.to_s(16).pad(bits/8*2)
+		end
   end
 
   def bin(len=8)
@@ -125,6 +129,11 @@ end
 binary = Binary.new(block, first: first, last: last)
 instructions = Instruction.all.map(&:new)
 decompiler = Decompiler.new(instructions, binary, entries: entries)
+
+# instructions.each do |instruction|
+# 	puts " -> #{instruction.mnemonic}"
+# end
+
 
 decompiler.run
 decompiler.code

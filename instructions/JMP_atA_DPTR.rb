@@ -10,4 +10,8 @@ class JMP_atA_DPTR < Instruction
   def encoding
     ["01110011"]
   end
+
+  def format(pc, *opcodes)
+    puts "jmp @A+DPTR"
+  end
 end

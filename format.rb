@@ -49,7 +49,7 @@ end
 def relative8(offset, from)
 	offset = signed8(offset)
 
-	"$ #{offset.hex(8)}h (0x#{(from+offset).hex(16)})"
+	"$ #{offset.hex(8)}h (#{(from+offset).hex(16)})"
 end
 
 def text8(byte)

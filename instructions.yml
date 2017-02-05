@@ -218,20 +218,20 @@
   :pseudo:
   - "(direct) = (direct) AND A"
   :example: ANL 40h, A
-- :instruction: 'CJNE @Rn, #immediate, offset'
+- :instruction: 'CJNE @Ri, #immediate, offset'
   :psw:
   - C
   :bytes: 3
   :cycles: 2
   :encoding:
-  - 1011011n
+  - 1011011i
   - immediate
   - offset
   :pseudo:
   - PC = PC + 3
-  - IF (Rn) <> immedate
+  - IF (Ri) <> immedate
   - "  PC = PC + offset"
-  - IF (Rn) < immediate
+  - IF (Ri) < immediate
   - "  C = 1"
   - ELSE
   - "  C = 0"

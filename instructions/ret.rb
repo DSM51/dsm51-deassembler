@@ -11,6 +11,10 @@ class RET < Instruction
     ["00100010"]
   end
 
+  def format(pc, *opcodes)
+    "ret"
+  end
+
   def jumps(pc, *opcodes)
     []
   end

@@ -1,6 +1,6 @@
-class CJNE_atRn_immediate_offset < Instruction
+class CJNE_atRi_immediate_offset < Instruction
   def mnemonic
-    "CJNE @Rn, #immediate, offset"
+    "CJNE @Ri, #immediate, offset"
   end
 
   def size
@@ -8,6 +8,16 @@ class CJNE_atRn_immediate_offset < Instruction
   end
 
   def encoding
-    ["1011011n", "immediate", "offset"]
+    ["1011011i", "immediate", "offset"]
+  end
+
+  def format(pc, *opcodes)
+    i = register_i_mask(encoding[0])
+
+    "cjne R#{i}, #{immediate8(opcodes[1])}, #{relative8(opcodes[2], pc+size)}"
+  end
+
+  def jumps(pc, *opcodes)
+    super + [pc+size+signed8(opcodes[2])]
   end
 end

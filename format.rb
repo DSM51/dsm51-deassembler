@@ -63,7 +63,7 @@ def text8(byte)
 end
 
 def relative11(offset, from)
-	current = from & 0b1110_0000_0000_0000
+	current = from & 0b1111_1000_0000_0000
 	target = current|offset
 
 	"$ #{offset.hex(11)}h (#{target.hex(16)})"

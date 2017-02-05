@@ -24,7 +24,7 @@ class ACALL_addr11 < Instruction
     high = (opcodes[0] & 0b1110_0000) >> 5
     address = high*256+low
 
-    current = pc & 0b1110_0000_0000_0000
+    current = pc & 0b1111_1000_0000_0000
     target = current|address
 
     super + [target]

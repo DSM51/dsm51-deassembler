@@ -12,7 +12,7 @@ class CJNE_A_direct_offset < Instruction
   end
 
   def format(pc, *opcodes)
-    "cjne #{direct8(opcodes[1])}, #{relative8(opcodes[2], pc+size)}"
+    "cjne A, #{direct8(opcodes[1])}, #{relative8(opcodes[2], pc+size)}"
   end
 
   def jumps(pc, *opcodes)

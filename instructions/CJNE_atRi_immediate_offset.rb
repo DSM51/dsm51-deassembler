@@ -14,7 +14,7 @@ class CJNE_atRi_immediate_offset < Instruction
   def format(pc, *opcodes)
     i = opcodes[0] & register_i_mask(encoding[0])
 
-    "cjne R#{i}, #{immediate8(opcodes[1])}, #{relative8(opcodes[2], pc+size)}"
+    "cjne @R#{i}, #{immediate8(opcodes[1])}, #{relative8(opcodes[2], pc+size)}"
   end
 
   def jumps(pc, *opcodes)
